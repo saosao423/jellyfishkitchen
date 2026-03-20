@@ -1,0 +1,42 @@
+# --- Gradle 核心缓存与构建结果 (必填) ---
+.gradle/
+build/
+
+# --- Minecraft 运行目录 (必填) ---
+# 这里包含你的测试存档、游戏日志、截图和个人设置
+run/
+# 如果你使用了多端测试，可能还有 runClient/, runServer/ 等
+runClient/
+runServer/
+runGameTestServer/
+
+# --- IntelliJ IDEA 项目文件 ---
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
+# 保留项目运行配置（可选，如果你想分享你的 runClient 配置可以删掉下面这行）
+# !.idea/runConfigurations/
+
+# --- VS Code 项目文件 ---
+.vscode/
+.settings/
+.project
+.classpath
+.factorypath
+
+# --- 编译产生的日志与临时文件 ---
+*.log
+*.tmp
+*.bak
+
+# --- 操作系统产生的杂物 ---
+Thumbs.db
+.DS_Store
+
+# --- 证书与私钥 (如果有) ---
+*.keystore
+*.jks
+*.p12
+/.idea/

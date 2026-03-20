@@ -1,67 +1,61 @@
 package com.saosao.jellyfishkitchen;
 
-import org.slf4j.Logger;
-
 import com.mojang.logging.LogUtils;
-
-import net.minecraft.world.item.CreativeModeTabs;
-import com.saosao.jellyfishkitchen.registry.ModItems;
-import com.saosao.jellyfishkitchen.registry.ModBiomes;
+import com.saosao.jellyfishkitchen.client.ClientModEvents;
 import com.saosao.jellyfishkitchen.registry.ModBlocks;
+import com.saosao.jellyfishkitchen.registry.ModItems;
+import net.minecraft.world.item.CreativeModeTabs;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
-import net.minecraft.resources.ResourceLocation;
+import org.slf4j.Logger;
 
-// The value here should match an entry in the META-INF/neoforge.mods.toml file
+/**
+ * Mod 主入口类
+ */
 @Mod(JellyfishKitchen.MODID)
 public class JellyfishKitchen {
-    // Define mod id in a common place for everything to reference
+    // 确保这里的 MODID 与你 resources/META-INF/neoforge.mods.toml 里的 modId 一致
     public static final String MODID = "jellyfishkitchen";
-    // Directly reference a slf4j logger
     public static final Logger LOGGER = LogUtils.getLogger();
 
-
-    // The constructor for the mod class is the first code that is run when your mod is loaded.
-    // FML will recognize some parameter types like IEventBus or ModContainer and pass them in automatically.
     public JellyfishKitchen(IEventBus modEventBus) {
-        // Register the commonSetup method for modloading
+        // 1. 注册核心组件
+        ModBlocks.register(modEventBus);
+        ModItems.register(modEventBus);
+
+        // 2. 注册加载阶段的通用设置
         modEventBus.addListener(this::commonSetup);
 
-        // Register mod items
-        ModItems.register(modEventBus);
-        // Register mod blocks
-        ModBlocks.register(modEventBus);
-        // Register mod biomes
-        // ModBiomes.register(modEventBus);
-
-        // Register ourselves for server and other game events we are interested in.
-        // NeoForge.EVENT_BUS.register(this);
-
-        // Register the item to a creative tab
+        // 3. 注册物品栏添加事件
         modEventBus.addListener(this::addCreative);
+
+        // 4. 手动注册客户端设置事件（消除警告的关键）
+        // 这行代码会告诉 NeoForge 去 ClientModEvents 类里运行 onClientSetup 方法
+        modEventBus.addListener(ClientModEvents::onClientSetup);
+
+        // 注意：不要在此调用 NeoForge.EVENT_BUS.register(this)，
+        // 因为本类中目前没有任何带有 @SubscribeEvent 的方法。
     }
 
     private void commonSetup(FMLCommonSetupEvent event) {
-        // Common setup code
+        LOGGER.info("Jellyfish Kitchen 正在加载通用设置...");
     }
 
-    // Add items and blocks to creative tabs
+    /**
+     * 将物品添加到原版的创意模式栏
+     */
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
+        // 将水母网添加到工具栏
         if (event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES) {
             event.accept(ModItems.JELLYFISH_NET);
         }
+
+        // 将方块添加到建筑方块栏
         if (event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS) {
-            event.accept(ModBlocks.CORALSTONE);
-            event.accept(ModBlocks.ALGAE_GRASS);
+            event.accept(ModItems.CORALSTONE);
+            event.accept(ModItems.ALGAE_GRASS);
         }
-    }
-
-
-
-    public static ResourceLocation rl(String path) {
-        return ResourceLocation.fromNamespaceAndPath(MODID, path);
     }
 }
