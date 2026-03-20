@@ -1,0 +1,62 @@
+{
+  "loader": "neoforge:separate_transforms",
+  "gui_light": "front",
+  "base": {
+    "parent": "minecraft:item/generated",
+    "textures": {
+      "layer0": "jellyfishkitchen:item/jellyfish_net"
+    }
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "jellyfishkitchen:entity_type": 1
+      },
+      "model": "jellyfishkitchen:item/net_of_jellyfish"
+    },
+    {
+      "predicate": {
+        "jellyfishkitchen:entity_type": 2
+      },
+      "model": "jellyfishkitchen:item/net_of_blue_jellyfish"
+    },
+    {
+      "predicate": {
+        "jellyfishkitchen:entity_type": 3
+      },
+      "model": "jellyfishkitchen:item/net_of_bubble_jellyfish"
+    },
+    {
+      "predicate": {
+        "jellyfishkitchen:entity_type": 4
+      },
+      "model": "jellyfishkitchen:item/net_of_cow_jellyfish"
+    },
+    {
+      "predicate": {
+        "jellyfishkitchen:entity_type": 5
+      },
+      "model": "jellyfishkitchen:item/net_of_grease_jellyfish"
+    },
+    {
+      "predicate": {
+        "jellyfishkitchen:entity_type": 6
+      },
+      "model": "jellyfishkitchen:item/net_of_two_fisted_jumper"
+    }
+  ],
+  "perspectives": {
+    "thirdperson_lefthand": {
+      "parent": "jellyfishkitchen:item/jellyfish_net_3d"
+    },
+    "firstperson_lefthand": {
+      "parent": "jellyfishkitchen:item/jellyfish_net_3d"
+    },
+    "thirdperson_righthand": {
+      "parent": "jellyfishkitchen:item/jellyfish_net_3d"
+    },
+    "firstperson_righthand": {
+      "parent": "jellyfishkitchen:item/jellyfish_net_3d"
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "itemGroup.jellyfishkitchen": "Jellyfish Kitchen",
+  "block.jellyfishkitchen.algae_grass": "Algae Grass",
+  "block.jellyfishkitchen.coralstone": "Coralstone",
+  "item.jellyfishkitchen.jellyfish_net": "Jellyfish Net",
+
+  "jellyfishkitchen.configuration.title": "Jellyfish Kitchen Configs",
+  "jellyfishkitchen.configuration.section.jellyfishkitchen.common.toml": "Jellyfish Kitchen Configs",
+  "jellyfishkitchen.configuration.section.jellyfishkitchen.common.toml.title": "Jellyfish Kitchen Configs"
+}
