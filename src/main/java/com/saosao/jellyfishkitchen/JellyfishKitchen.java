@@ -4,6 +4,7 @@ import com.mojang.logging.LogUtils;
 import com.saosao.jellyfishkitchen.client.ClientModEvents;
 import com.saosao.jellyfishkitchen.registry.ModBlocks;
 import com.saosao.jellyfishkitchen.registry.ModItems;
+import com.saosao.jellyfishkitchen.registry.ModTerrablender;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
@@ -25,6 +26,8 @@ public class JellyfishKitchen {
         ModBlocks.register(modEventBus);
         ModItems.register(modEventBus);
 
+        modEventBus.addListener(this::setupTerrablender);
+
         // 2. 注册加载阶段的通用设置
         modEventBus.addListener(this::commonSetup);
 
@@ -41,6 +44,10 @@ public class JellyfishKitchen {
 
     private void commonSetup(FMLCommonSetupEvent event) {
         LOGGER.info("Jellyfish Kitchen 正在加载通用设置...");
+    }
+
+    private void setupTerrablender(FMLCommonSetupEvent event) {
+        event.enqueueWork(ModTerrablender::register);
     }
 
     /**

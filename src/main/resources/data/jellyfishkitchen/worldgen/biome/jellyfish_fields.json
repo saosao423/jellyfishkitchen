@@ -1,0 +1,23 @@
+{
+  "has_precipitation": true,
+  "temperature": 0.5,
+  "downfall": 0.5,
+  "creature_spawn_probability": 0.1,
+  "effects": {
+    "sky_color": 8103167,
+    "fog_color": 12638463,
+    "water_color": 4566514,
+    "water_fog_color": 267827,
+    "grass_color": 9285927,
+    "foliage_color": 9285927,
+    "ambient_sound": "minecraft:ambient.underwater.loop"
+  },
+  "spawners": {},
+  "spawn_costs": {},
+  "carvers": {
+    "air": [ "minecraft:cave" ]
+  },
+  "features": [
+    [], [], [], [], [], [], [], [], [], []
+  ]
+}

@@ -27,10 +27,16 @@ sourceSets.main.resources {
 }
 
 repositories {
-    // Add here additional repositories if required by some of the dependencies below.
+    // 1. Blueprint 的仓库
     maven {
         url = "https://maven.teamabnormals.com/"
     }
+    // 2. TerraBlender 的仓库 (必须是这个地址)
+    maven {
+        url = "https://maven.minecraftforge.net/"
+    }
+    // 3. 基础库
+    mavenCentral()
 }
 
 base {
@@ -123,7 +129,7 @@ configurations {
 dependencies {
     // Blueprint dependency
     implementation("com.teamabnormals:blueprint:${minecraft_version}-${blueprint}")
-
+    implementation("com.github.glitchfiend:TerraBlender-neoforge:${minecraft_version}-${terrablender}")
     // Example optional mod dependency with JEI
     // The JEI API is declared for compile time use, while the full JEI artifact is used at runtime
     // compileOnly "mezz.jei:jei-${mc_version}-common-api:${jei_version}"
@@ -160,6 +166,7 @@ var generateModMetadata = tasks.register("generateModMetadata", ProcessResources
             mod_license            : mod_license,
             mod_version            : mod_version,
             blueprint              : blueprint,
+            terrablender           : terrablender // 添加这一行
     ]
     inputs.properties replaceProperties
     expand replaceProperties
@@ -180,9 +187,8 @@ publishing {
         }
     }
     repositories {
-        maven {
-            url "file://${project.projectDir}/repo"
-        }
+        maven { url = "https://maven.teamabnormals.com/" } // Blueprint 所在的仓库
+        maven { url = "https://maven.minecraftforge.net/" } // TerraBlender 所在的仓库
     }
 }
 
